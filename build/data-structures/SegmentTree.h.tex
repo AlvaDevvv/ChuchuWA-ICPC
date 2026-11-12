@@ -1,0 +1,26 @@
+\needspace{6\baselineskip}
+\kactlsection{SegmentTree}{db129c}
+\kactldesc{Segment tree iterativo. Actualización puntual y consulta en [l, r). op debe ser asociativa con neutro e.}
+\kactlusage{SegTree st(n); st.update(i, v); st.query(l, r);}
+\kactltime{$O(\log N)$ por operación}
+\begin{lstlisting}[language=C++]
+struct SegTree {
+	typedef ll T;
+	static constexpr T e = LLONG_MIN;
+	T op(T a, T b) { return max(a, b); }
+	int n;
+	vector<T> t;
+	SegTree(int n = 0) : n(n), t(2 * n, e) {}
+	void update(int i, T v) {
+		for (t[i += n] = v; i >>= 1;) t[i] = op(t[2 * i], t[2 * i + 1]);
+	}
+	T query(int l, int r) {
+		T a = e, b = e;
+		for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+			if (l & 1) a = op(a, t[l++]);
+			if (r & 1) b = op(t[--r], b);
+		}
+		return op(a, b);
+	}
+};
+\end{lstlisting}

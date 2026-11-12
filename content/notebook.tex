@@ -1,0 +1,70 @@
+\documentclass[8pt,a4paper,landscape]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[landscape,margin=0.9cm,headsep=0.25cm,headheight=0.45cm,footskip=0.4cm]{geometry}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{needspace}
+\usepackage{amsmath,amssymb}
+
+\newcommand{\teamname}{ChuchuWA}
+\newcommand{\university}{UTEC}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{\university{} -- \teamname}}
+\chead{\leftmark}
+\rhead{\thepage{}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\columnsep}{0.35cm}
+\setlength{\columnseprule}{0.3pt}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\vspace{-0.4ex}\hrule]
+\titlespacing*{\section}{0pt}{1.2ex}{0.8ex}
+\newcommand{\kactlchapter}[1]{\section{#1}\markboth{#1}{#1}}
+\newcommand{\kactlsection}[2]{\vspace{0.8ex}\noindent\textbf{#1}\hfill{\scriptsize\texttt{#2}}\par\nopagebreak}
+\newcommand{\kactldesc}[1]{{\small\textbf{Desc:} #1}\par\nopagebreak}
+\newcommand{\kactlusage}[1]{{\small\textbf{Uso:} #1}\par\nopagebreak}
+\newcommand{\kactltime}[1]{{\small\textbf{Tiempo:} #1}\par\nopagebreak}
+\newcommand{\kactlimport}[1]{\InputIfFileExists{build/\currentchapter/#1.tex}{}{\typeout{FALTA build/\currentchapter/#1.tex}}}
+\newcommand{\currentchapter}{}
+\newcommand{\kactlinclude}[1]{\renewcommand{\currentchapter}{#1}\input{content/#1/chapter.tex}}
+
+\definecolor{kw}{RGB}{0,0,160}
+\definecolor{cm}{RGB}{0,110,0}
+\definecolor{st}{RGB}{160,0,0}
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{kw}\bfseries,
+  commentstyle=\color{cm},
+  stringstyle=\color{st},
+  breaklines=true,
+  breakatwhitespace=false,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=0.3ex,
+  belowskip=0.3ex,
+  frame=none,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
+}
+
+\begin{document}
+\begin{multicols*}{3}
+\raggedcolumns
+\kactlinclude{contest}
+\kactlinclude{data-structures}
+\kactlinclude{graph}
+\kactlinclude{number-theory}
+\kactlinclude{strings}
+\end{multicols*}
+\end{document}
