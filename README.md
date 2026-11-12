@@ -1,1 +1,1 @@
-# ChuchuWA---ICPC
+# ChuchuWA-ICPC
