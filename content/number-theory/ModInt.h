@@ -3,9 +3,9 @@
  * Date: 2026-11-12
  * License: CC0
  * Source: implementación propia
- * Description: Aritmética modular con el MOD primo del template. inv usa el
- * pequeño teorema de Fermat. Time: $O(1)$ por operación, $O(\log MOD)$ para pow
- * e inv Status: stress-tested
+ * Description: Aritmética modular con el MOD primo del template. inv usa el pequeño teorema de Fermat. 
+ * Time: $O(1)$ por operación, $O(\log MOD)$ para pow e inv 
+ * Status: stress-tested
  */
 #pragma once
 
