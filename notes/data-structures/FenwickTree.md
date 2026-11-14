@@ -4,13 +4,13 @@ Estructura de datos ligera y extremadamente rápida para procesar consultas de s
 
 Implementaciones del notebook: `content/data-structures/FenwickTree.h`, `FenwickRUPQ.h`, `FenwickRURQ.h` (todas **1-indexadas**).
 
-## 📌 TL;DR (Resumen Rápido)
+## TL;DR (Resumen Rápido)
 - **¿Qué resuelve?** Sumas de rangos con actualizaciones de un solo elemento.
 - **¿Cuándo usarlo?** Cuando la memoria/tiempo es límite, como parte de algoritmos de barrido (Sweep Line), conteo de inversiones, o para buscar el k-ésimo elemento de un conjunto dinámico (`lower_bound`).
 - **¿Cuándo NO usarlo?** Para consultas que no son invertibles (como RMQ, Mínimo/Máximo), a menos que solo se consulte el prefijo y los valores solo aumenten. Tampoco para **asignación** en rango (`a[l..r] = v`): eso es Segment Tree con lazy.
 - **Variantes:** con un BIT sobre diferencias se obtiene **RUPQ**; con dos BITs, **RURQ** (ver al final).
 
-## ⏱️ Complejidades
+## Complejidades
 | Operación | Complejidad de Tiempo | Descripción |
 | :--- | :--- | :--- |
 | `update(i, v)` | $\mathcal{O}(\log m)$ | Suma `v` al elemento en la posición `i`. |
@@ -27,7 +27,7 @@ Implementaciones del notebook: `content/data-structures/FenwickTree.h`, `Fenwick
 | RUPQ | rango, $\mathcal{O}(\log m)$ (2 updates) | punto, $\mathcal{O}(\log m)$ | 1 BIT |
 | RURQ | rango, $\mathcal{O}(\log m)$ (4 updates) | rango, $\mathcal{O}(\log m)$ (4 consultas) | 2 BITs |
 
-## 🔎 Patrones de reconocimiento
+## Patrones de reconocimiento
 | Si el enunciado dice... | Pensar en |
 | :--- | :--- |
 | Sumas de rango + cambiar un elemento | BIT clásico |
@@ -38,7 +38,7 @@ Implementaciones del notebook: `content/data-structures/FenwickTree.h`, `Fenwick
 | Contar pares $i<j$ con una condición sobre los valores | Barrido + BIT sobre valores (comprimidos) |
 | Muchas consultas de rango sin updates con "distintos" | Offline: ordenar por `r` + BIT |
 
-## ⚠️ Checklist de Errores Comunes (¡Cuidado en Contests!)
+## Checklist de Errores Comunes (¡Cuidado en Contests!)
 - [ ] **Indexación 1-based:** El índice `0` causa un bucle infinito (Segment Fault / TLE). ¡Nunca llames a `update(0, v)`! (`query(0)` sí es seguro: devuelve 0.)
 - [ ] **Una sola convención:** si el arreglo de entrada es 0-indexado y el BIT 1-indexado, convertir el índice **una vez** al leerlo. Antes de corregir un índice, listar cada objeto que lo usa y su convención.
 - [ ] **Asignar ≠ sumar:** `a[p] = v` se hace con `update(p, v - a[p]); a[p] = v;`. Hay que guardar el arreglo original.
@@ -358,12 +358,12 @@ struct FenwickRURQ{
 | $\sum B_2[1..i]$ | bucle `s2` | `sum(b2, i)` |
 | $i\sum B_1 - \sum B_2$ | `s1*i - s2` | `sum(b1,i)*i - sum(b2,i)` |
 
-### ⚠️ Checklist RURQ
+### Checklist RURQ
 - [ ] **No mezclar particiones:** también vale $i-k+1 = (i+1) - k$ → $\text{prefix}(i) = (i+1)\sum D - \sum D\cdot k$, con updates $v\,l$ y $-v(r+1)$. Elegir **una** y memorizarla tal cual.
 - [ ] **Cuando $r = n$:** `add(b, n+1, ...)` no hace nada porque el `for` corta con `pos <= n`; no hace falta `if`.
 - [ ] **Overflow:** `v * r` y `sum(b1, i) * i` deben ser `ll`. Ojo: `sum(b1, i) * i` puede desbordar **antes** que la respuesta final (con $n, q \le 2\cdot10^5$ y $v \le 10^9$, la suma llega a $\sim 4\cdot10^{19}$). Acotar antes de codear; si no cabe, usar `i128` en `prefix` o trabajar módulo.
 
-## 📚 Problemas de práctica
+## Problemas de práctica
 | Problema | Técnica |
 | :--- | :--- |
 | CSES 1648 — Dynamic Range Sum Queries | BIT clásico (asignación como delta) |
