@@ -10,6 +10,7 @@ content/
   <tema>/chapter.tex      título del capítulo + lista \kactlimport{Archivo.h}
   <tema>/*.h              un algoritmo por archivo, con encabezado
 stress-tests/<tema>/*.cpp un test por algoritmo (compara contra fuerza bruta)
+notes/<tema>/*.md        apuntes de estudio (explicación, demostraciones, patrones)
 scripts/                  build.py, compile-all.sh, stress.sh
 ```
 
